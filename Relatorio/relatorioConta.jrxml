@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d958c822-0410-45e6-874d-6b7190305693">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="mes" class="java.lang.Integer"/>
+	<field name="codigoCliente" class="java.lang.String"/>
+	<field name="consumo" class="java.lang.Integer"/>
+	<field name="valor" class="java.lang.Double"/>
+	<variable name="totalConsumido" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{consumo}]]></variableExpression>
+	</variable>
+	<variable name="qtdClientes" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{codigoCliente}]]></variableExpression>
+	</variable>
+	<variable name="totalValor" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{valor}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="100" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="0" width="553" height="70" backcolor="#000000" uuid="f2d721b6-1077-45ca-ad3c-b9b17a3474a6"/>
+				<staticText>
+					<reportElement style="Title" x="0" y="0" width="553" height="60" uuid="13d6fbd4-682c-4c96-b113-a21710cbb150"/>
+					<textElement>
+						<font isBold="false"/>
+					</textElement>
+					<text><![CDATA[Relatório Mensal  - GSZ]]></text>
+				</staticText>
+			</frame>
+			<textField pattern="MMM">
+				<reportElement x="5" y="80" width="146" height="20" uuid="99e7c2c0-4e06-4c05-875a-37cf2e6508e2"/>
+				<textFieldExpression><![CDATA["Relatório referênte ao mes "]]></textFieldExpression>
+			</textField>
+			<textField pattern="###00">
+				<reportElement x="151" y="80" width="219" height="20" uuid="de019f24-4467-4806-9d76-4934adac5a7f"/>
+				<textFieldExpression><![CDATA[$P{mes}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="40" splitType="Stretch">
+			<textField>
+				<reportElement x="5" y="10" width="180" height="20" uuid="df926e27-3e29-41ff-b1a0-d774a415440b"/>
+				<textFieldExpression><![CDATA["Código do Cliente"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="195" y="10" width="175" height="20" uuid="de4f484d-b24d-4656-aaad-ec767e627956"/>
+				<textFieldExpression><![CDATA["Consumo em KWh"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="380" y="10" width="185" height="20" uuid="1ae67e05-f689-41cc-93ba-2aa7974ab29e"/>
+				<textFieldExpression><![CDATA["Valor da Conta"]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="5" y="0" width="180" height="20" uuid="54cb4a3f-59e3-4b1c-bc71-4790a79bf3d8"/>
+				<textFieldExpression><![CDATA[$F{codigoCliente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="195" y="0" width="175" height="20" uuid="73d69b5b-3fdb-4209-89ab-9c49f9eb5d4f"/>
+				<textFieldExpression><![CDATA[$F{consumo}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="380" y="0" width="185" height="20" uuid="73e13e53-7858-4e54-83f1-f735daf56d87"/>
+				<textFieldExpression><![CDATA[$F{valor}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="1" width="555" height="24" forecolor="#D0B48E" backcolor="#000000" uuid="c13ad199-ae88-4a55-9581-26b85cb91d1e"/>
+				<textField evaluationTime="Report">
+					<reportElement style="Column header" x="513" y="0" width="40" height="20" forecolor="#FFFFFF" uuid="7f11ab81-738a-4014-9a4f-4c868ee66c40"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Column header" x="352" y="0" width="161" height="20" forecolor="#FFFFFF" uuid="0f81ead4-4320-4cdd-9c1e-3918dc28f7e4"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" até"]]></textFieldExpression>
+				</textField>
+				<textField pattern="dd/MM/yyyy HH.mm.ss">
+					<reportElement style="Column header" x="96" y="4" width="193" height="20" forecolor="#FFFFFF" uuid="6c8bd439-6a46-4c78-bb4f-45f9d232b271"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()
+]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="5" y="4" width="80" height="20" forecolor="#FFFFFF" uuid="a7b9e20b-81de-4952-8178-0d692a724f4a"/>
+					<textFieldExpression><![CDATA["Data: "]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="60" splitType="Stretch">
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="151" y="40" width="103" height="20" uuid="3e516d9a-470e-465a-94ec-91ad59beea67"/>
+				<textFieldExpression><![CDATA[$V{totalValor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="2" y="40" width="139" height="20" uuid="d37e24f8-931a-4099-9e01-60d07767c558"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA["Valor total: "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="273" y="40" width="141" height="20" uuid="8016a1ff-73cd-425b-adaa-8536f7337bf3"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA["Media do valor: "]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="428" y="40" width="123" height="20" uuid="15816729-a146-4bde-b1cc-7cba15af2afb"/>
+				<textFieldExpression><![CDATA[$V{totalValor} / $V{qtdClientes}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="2" y="10" width="139" height="20" uuid="d5f81bad-d022-4fec-966e-e1d36ba10bd9"/>
+				<textFieldExpression><![CDATA["Total consumido em KWH: "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="273" y="10" width="141" height="20" uuid="c08cb45a-e559-4480-a15a-ea9622335c0c"/>
+				<textFieldExpression><![CDATA["Media de KWh consumido: "]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="151" y="10" width="103" height="20" uuid="d171822e-ccfb-41c8-a197-d03460711454"/>
+				<textFieldExpression><![CDATA[$V{totalConsumido}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="428" y="10" width="123" height="20" uuid="0725aeaa-4466-4a30-9a1d-43078f9f2f79"/>
+				<textFieldExpression><![CDATA[$V{totalConsumido} / $V{qtdClientes}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>
